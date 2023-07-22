@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import NoteEditor from "./components/NoteEditor";
+import NoteList from "./components/NoteList";
+import TagFilter from "./components/TagFilter";
+import { AppBar, Toolbar, Typography } from "@mui/material";
 
-function App() {
+const App: React.FC = () => {
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  const handleFilterChange = (selectedTags: string[]) => {
+    setSelectedTags(selectedTags);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AppBar position="sticky">
+        <Toolbar>
+          <Typography variant="h6">
+            Текстовый редактор заметок с тегами
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <NoteEditor />
+      <TagFilter onFilterChange={handleFilterChange} />
+      <NoteList selectedTags={selectedTags} />
     </div>
   );
-}
+};
 
 export default App;

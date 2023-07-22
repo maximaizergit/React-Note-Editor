@@ -1,13 +1,64 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+h3,
+h2 {
+  margin-left: 40px;
+}
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
+
+.MuiCardContent-root {
+  word-wrap: break-word;
+}
+@media screen and (max-width: 540px) {
+  .MuiButton-root {
+    text-indent: -9999px; /* Скрываем текст за пределы кнопки */
+    overflow: hidden;
+    white-space: nowrap; /* Чтобы текст не переносился на новую строку */
+    max-width: 30px;
+    padding: 0;
+  }
+}
+/* Стили для поля ввода и кнопки на одной строке */
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Другие стили для контейнера */
+
+  /* Установите свойство flex-wrap на nowrap, чтобы кнопка не перемещалась на новую строку */
+  flex-wrap: nowrap;
+
+  /* Медиа-запрос для уменьшения разрешения */
+  @media (max-width: 600px) {
+    /* Уменьшите размер поля ввода, чтобы кнопка умещалась рядом */
+    input {
+      flex: 1;
+    }
+  }
 }
