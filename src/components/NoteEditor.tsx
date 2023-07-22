@@ -32,10 +32,9 @@ const NoteEditor: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Retrieve notes from local storage and update the Redux store
+      // получение записей из IndexedDB и сохранение в redux
       const notesFromLocalStorage = await getNotesFromIndexedDB();
       if (notesFromLocalStorage) {
-        // Dispatch an action to add the retrieved notes to the Redux store
         dispatch(addNotes(notesFromLocalStorage));
       }
     };
@@ -59,7 +58,6 @@ const NoteEditor: React.FC = () => {
     }
   };
 
-  // Функция для создания тегов из текста заметки
   const createTagsFromText = (text: string) => {
     const words = text.split(" ");
     return words.filter((word) => word.startsWith("#"));
@@ -140,15 +138,14 @@ const NoteEditor: React.FC = () => {
               <CardContent>
                 <Typography>
                   {note.text}
-                  {/* Добавляем Chip для отображения тегов */}
                   {createTagsFromText(note.text).map((tag) => (
                     <Chip
                       key={tag}
                       label={tag}
                       sx={{
-                        backgroundColor: "blue", // Здесь можно указать нужный цвет фона
-                        color: "white", // Цвет текста тега
-                        margin: "2px", // Отступы вокруг тегов
+                        backgroundColor: "blue",
+                        color: "white",
+                        margin: "2px",
                       }}
                     />
                   ))}

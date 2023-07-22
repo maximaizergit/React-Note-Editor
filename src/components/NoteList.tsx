@@ -1,14 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/reducers";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Button,
-  TextField,
-  Chip,
-} from "@mui/material";
+import { Card, CardContent, Typography, Chip } from "@mui/material";
 
 interface Note {
   id: number;
@@ -26,20 +19,22 @@ const NoteList: React.FC<NoteListProps> = ({ selectedTags }) => {
   const handleFilterChange = useCallback(
     (selectedTags: string[]) => {
       if (selectedTags.length === 0) {
-        setFilteredNotes(notes); // Reset to all notes if no tags are selected
+        setFilteredNotes(notes); // вывод всех тегов записей если нет выбранного тега
       } else {
         const filtered = notes.filter((note) =>
           selectedTags.some((tag) => note.text.includes(tag))
         );
-        setFilteredNotes(filtered); // Set the filtered notes based on selected tags
+        setFilteredNotes(filtered); // вывод записей по тегам
       }
     },
     [notes]
   );
+
   // Обновление списка заметок при изменении выбранных тегов
   useEffect(() => {
     handleFilterChange(selectedTags);
   }, [selectedTags, notes, handleFilterChange]);
+
   function createTagsFromText(text: string) {
     const words = text.split(" ");
     return words.filter((word) => word.startsWith("#"));
@@ -56,15 +51,14 @@ const NoteList: React.FC<NoteListProps> = ({ selectedTags }) => {
         >
           <CardContent>
             <Typography>{note.text}</Typography>
-            {/* Добавляем Chip для отображения тегов */}
             {createTagsFromText(note.text).map((tag) => (
               <Chip
                 key={tag}
                 label={tag}
                 sx={{
-                  backgroundColor: "blue", // Здесь можно указать нужный цвет фона
-                  color: "white", // Цвет текста тега
-                  margin: "2px", // Отступы вокруг тегов
+                  backgroundColor: "blue",
+                  color: "white",
+                  margin: "2px",
                 }}
               />
             ))}
